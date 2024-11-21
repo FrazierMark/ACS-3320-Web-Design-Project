@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="hero">
+  <h1 class="hero-title">Your Memories begin here...</h1>
+  
+  <div class="search-container">
+    <form action="/results" method="POST" class="search-form">
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <div class="input-wrapper">
+          <input 
+            type="number" 
+            id="zip" 
+            name="zip" 
+            placeholder="Enter zip code"
+            required 
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="radius">Mile Radius</label>
+        <div class="input-wrapper">
+          <input 
+            type="number" 
+            id="radius" 
+            name="radius" 
+            placeholder="Enter distance"
+            required 
+          />
+        </div>
+      </div>
+
+      <button id="btn" type="submit">
+        <span>Find Events</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+
+{% endblock content %}

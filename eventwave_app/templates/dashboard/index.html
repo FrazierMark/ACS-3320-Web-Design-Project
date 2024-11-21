@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %}
+<div class="dashboard-header">
+  <h1>My Events</h1>
+  <h4>Upcoming</h4>
+</div>
+
+<div class="events-grid">
+  {% for event in context %}
+  <div class="event-card">
+    <div class="event-header">
+      <h4>{{ event.title }}</h4>
+    </div>
+    
+    <div class="event-date">
+      {{ event.date_time }}
+    </div>
+
+    <img class="event-image" src="{{ event.image }}" alt="Event Image">
+    
+    <div class="event-actions">
+      <a href="/events/detail/{{event.seatgeek_id}}" class="btn btn-primary">Event Details</a>
+      <form action="/dashboard/delete/{{ event.seatgeek_id }}" method="POST" style="display: inline;">
+        <input type="hidden" name="DELETE" value="Delete Event">
+        <button class="btn btn-danger" type="submit">Delete Event</button>
+      </form>
+    </div>
+
+    <div class="comments-section">
+      <form action="/dashboard/comment/add/{{ event.seatgeek_id }}" method="POST" class="comment-form">
+        <input type="text" name="comment" placeholder="Add a comment..." class="comment-input">
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+
+      {% for comment in event.comments %}
+      <div class="comment">
+        <div class="comment-text">{{ comment.comment }}</div>
+        <form action="/dashboard/comment/delete/{{ comment.id }}" method="POST" style="display: inline;">
+          <input type="hidden" name="DELETE" value="Delete Comment">
+          <button class="btn btn-danger comment-delete" type="submit">Delete</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
